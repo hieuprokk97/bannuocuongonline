@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% include 'common/head.html'%}
+
+<head>
+    <title>{%block title%}{%endblock title%}</title>
+</head>
+<body>
+    {% include 'common/header.html'%}
+
+    {% block content %}
+    {% endblock %}
+
+    {% include 'common/scripts.html'%}
+    
+    {% include 'common/footer.html' %}
+
+</body>

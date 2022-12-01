@@ -1,0 +1,127 @@
+{% extends 'common/layout.html' %}
+{%block title%}Profile{%endblock title%}
+<body>
+    {%block content%}
+    <div class="container">
+        {%for message in messages%}
+        <div class="alert alert-{{message.tags}}" id="msg" role="alert">
+            {{message}}
+        </div>
+        {%endfor%}
+        <div class="row gutters-sm">
+          <div class="col-md-4 d-none d-md-block">
+            <div class="card">
+              <div class="card-body">
+                <nav class="nav flex-column nav-pills nav-gap-y-1">
+                  <a href="#profile" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded active">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user mr-2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Thông tin cá nhân
+                  </a>
+                  <a href="#security" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield mr-2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Đổi mật khẩu
+                  </a>
+                  <a href="#billing" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card mr-2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>Thanh toán
+                  </a>
+                </nav>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header border-bottom mb-3 d-flex d-md-none">
+                <ul class="nav nav-tabs card-header-tabs nav-gap-x-1" role="tablist">
+                  <li class="nav-item">
+                    <a href="#profile" data-toggle="tab" class="nav-link has-icon active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#security" data-toggle="tab" class="nav-link has-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#billing" data-toggle="tab" class="nav-link has-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body tab-content">
+                <div class="tab-pane active" id="profile">
+                  <h6>Thông tin cơ bản</h6>
+                  <hr>
+                  <form action="/updateProfile" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="fullName">Tên Khách Hàng</label>
+                      <input name="tenkhachhang" type="text" class="form-control" id="fullName" aria-describedby="fullNameHelp" value="{{khachhang_list.ten_khach_hang}}">                    
+                    </div>
+                    <div class="form-group">
+                      <label for="url">Tài khoản</label>
+                      <input name="taikhoan" type="text" class="form-control" id="url" value="{{nguoidung_list.tai_khoan}}">
+                    </div>
+                    <div class="form-group">
+                      <label for="location">Email</label>
+                      <input name="email" type="text" class="form-control" id="location" value="{{nguoidung_list.email}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Số điện thoại</label>
+                        <input name="sdt" type="text" class="form-control" id="location" value="{{khachhang_list.sdt}}">
+                      </div>
+                    <div class="form-group">
+                        <label for="location">Số nhà</label>
+                        <input name="sonha" type="text" class="form-control" id="location" value="{{khachhang_list.so_nha}}">
+                      </div>
+                      <div class="form-group">
+                        <label for="location">Đường</label>
+                        <input name="duong" type="text" class="form-control" id="location" value="{{khachhang_list.duong}}">
+                      </div>
+                      <div class="form-group">
+                        <label for="location">Phường</label>
+                        <input name="phuong" type="text" class="form-control" id="location" value="{{khachhang_list.phuong}}">
+                      </div>
+                      <div class="form-group">
+                        <label for="location">Quận</label>
+                        <input name="quan" type="text" class="form-control" id="location" value="{{khachhang_list.quan}}">
+                      </div>
+                      <div class="form-group">
+                        <label for="location">Tỉnh/thành phố</label>
+                        <input name="thanhpho" type="text" class="form-control" id="location" value="{{khachhang_list.thanh_pho}}">
+                      </div>
+
+                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                    <button type="reset" class="btn btn-light">Reset Changes</button>
+                  </form>
+                </div>
+                <div class="tab-pane" id="security">
+                  <h6>Đổi mật khẩu</h6>
+                  <hr>
+                  <form action="/changePass" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label class="d-block">Change Password</label>
+                      <input type="password" class="form-control" placeholder="Enter your old password" name="password">
+                      <input type="password" class="form-control mt-1" placeholder="New password" name="newpassword">
+                      <input type="password" class="form-control mt-1" placeholder="Confirm new password" name="confirmpassword">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
+                  </form>
+                </div>
+                <div class="tab-pane" id="billing">
+                  <h6>BILLING SETTINGS</h6>
+                  <hr>
+                  <form>
+                    <div class="form-group">
+                      <label class="d-block mb-0">Payment Method</label>
+                      <div class="small text-muted mb-3">You have not added a payment method</div>
+                      <button class="btn btn-info" type="button">Add Payment Method</button>
+                    </div>
+                    <div class="form-group mb-0">
+                      <label class="d-block">Payment History</label>
+                      <div class="border border-gray-500 bg-gray-200 p-3 text-center font-size-sm">You have not made any payment.</div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    {%endblock%}
+</body>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'css/styleLogin.css'%}" type="text/css">
+	<title>{%block title %}Login {%endblock%}</title>
+<body>
+<div class="container">
+	<div class="form sign-in-container">
+		<form action="" method="post">
+			{%for message in messages%}
+				<div class="alert alert-{{message.tags}}" id="msg" role="alert">
+					{{message}}
+				</div>
+        	{%endfor%}
+			{% csrf_token %}
+			<h1>Sign in</h1>
+			<input type="username" name="username" placeholder="Tài Khoản">
+			<input type="password" name="password" placeholder="Mật Khẩu">
+			<a>Forgot your password?</a>
+			<button>Sign In</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-right">
+				<h1>Sign UP</h1>
+				<p>Sign up here if you don't have account.</p>
+				<a href="/signup"><button class="signup_btn" >Sign Up</button></a>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
