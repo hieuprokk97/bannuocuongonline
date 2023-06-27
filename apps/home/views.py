@@ -1,4 +1,3 @@
-
 from datetime import datetime
 from decimal import Decimal
 from django.shortcuts import redirect, render
@@ -14,13 +13,13 @@ from apps.san_pham.models import SanPham as SanPham_Model
 from apps.nguoi_dung.models import NguoiDung
 from apps.don_hang.models import DonHang
 from apps.khach_hang.models import KhachHang
-from apps.khuyen_mai.models import KhuyenMai
 from apps.san_pham.models import SanPham
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 import json
 import string
 # Create your views here.
+
 
 def get_home(request): 
     loaisanpham_list = LoaiSanPham_model.objects.filter().order_by('ma_loai')
@@ -34,7 +33,6 @@ def signin(request):
     if request.method == 'POST':
         username = request.POST["username"]
         password = request.POST["password"]
-
         user = authenticate(username = username, password = password)
         if user is not None: 
             login(request, user)
@@ -132,10 +130,8 @@ def updateItem(request):
 
     return JsonResponse("Item was added", safe=False)
 
-
 def is_ajax(request):
     return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' 
-
 
 def addcart(request): 
     if is_ajax(request=request):
@@ -184,6 +180,7 @@ def xoaCartItem(request, id):
 
     return HttpResponseRedirect('/shop/cart')
     #return HttpResponse("Xóa sản phẩm thành công")
+@login_required
 def cart(request):
     global total
     cart = None
@@ -193,21 +190,8 @@ def cart(request):
     if cart is not None: 
         for value in cart:
             total += Decimal(value['price']) * int(value['quantity'])
-    print(total)
+            request.session['total'] = int(total)
     return render(request, 'pages/cart.html', {'cart': cart, 'total':total}) 
 
 def updateCart(request):
     return 
-
-def checkout(request):
-    cart = None 
-    total = 0
-    if 'cart' in request.session: 
-        cart = request.session['cart']
-    for value in cart:
-        total += Decimal(value['price']) * int(value['quantity'])
-    context = {
-        'cart': cart,
-        'total': total
-    }    
-    return render(request, 'pages/checkout.html', context)
