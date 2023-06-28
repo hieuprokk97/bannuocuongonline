@@ -1,3 +1,4 @@
+
 from datetime import datetime
 from decimal import Decimal
 from django.shortcuts import redirect, render
@@ -33,6 +34,7 @@ def signin(request):
     if request.method == 'POST':
         username = request.POST["username"]
         password = request.POST["password"]
+
         user = authenticate(username = username, password = password)
         if user is not None: 
             login(request, user)

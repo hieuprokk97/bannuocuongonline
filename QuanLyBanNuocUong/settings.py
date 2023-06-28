@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'jazzmin',
+    'paypal.standard.ipn',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,7 +43,6 @@ INSTALLED_APPS = [
     'apps.san_pham',
     'apps.nguoi_dung',
     'apps.khach_hang',
-    'apps.khuyen_mai',
     'apps.shipper',
     'apps.don_hang',
     'apps.thanh_toan',
@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'QuanLyBanNuocUong.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bannuocuongonline',
+        'NAME': 'django',
         'USER': 'root',
         'PASSWORD': 'Thinh2001!',
         'HOST': 'localhost',
@@ -221,3 +221,6 @@ JAZZMIN_SETTINGS = {
 
 }
 
+#Paypal Settings 
+PAYPAL_TEST = True
+PAYPAL_RECEIVER_EMAIL = "sb-ja47x622346526@business.example.com"
